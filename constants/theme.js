@@ -1,0 +1,1 @@
+// File to determine main style of the app
