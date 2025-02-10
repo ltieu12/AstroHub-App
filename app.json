@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "StellarSquad",
-    "slug": "stellarsquad",
+    "name": "AstroHub",
+    "slug": "astrohub",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "stellarsquad",
+    "scheme": "astrohub",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
