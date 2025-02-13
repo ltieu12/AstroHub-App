@@ -1,6 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { heightPer } from '../helpers/common'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Feather } from "@expo/vector-icons";
 
 const Button = ({
     buttonStyle,
@@ -8,25 +10,38 @@ const Button = ({
     title = '',
     onPress = () => {},
     loading = false,
-    hasShadow = true
+    icon = false
 }) => {
   return (
-    <Pressable onPress={ onPress } style={[styles.button]}>
-      <Text style={[styles.text, textStyle]}>{ title }</Text>
-    </Pressable>
+    <TouchableOpacity onPress={ onPress } style={ buttonStyle }>
+      <LinearGradient 
+        colors={['#4C46F0', '#ED6435']}
+        start={[0, 0.5]}
+        end={[1, 0.5]}
+        style={styles.linearGradient}
+      >
+        <View style={styles.content}>
+          <Text style={[styles.text, textStyle]}>{ title }</Text>
+          {icon && <Feather name="arrow-right" size={20} color="white" />}
+        </View>
+      </LinearGradient>
+    </TouchableOpacity>
   )
 }
 
 export default Button
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "linear-gradient(90deg, rgba(76, 70, 240, 0.90) 0%, rgba(237, 100, 53, 0.90) 100%)",
+    linearGradient: {
         height: heightPer(6.6),
         justifyContent: "center",
         alignItems: "center",
         borderCurve: "continuous",
         borderRadius: 15
+    },
+    content: {
+      flexDirection: 'row',
+      gap: 5
     },
     text: {
         fontFamily: 'Montserrat Alternates Medium'

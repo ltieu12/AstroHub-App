@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
-import ScreenWrapper from '../components/ScreenWrapper'
 import { StatusBar } from 'expo-status-bar'
 import { heightPer, widthPer } from '../helpers/common'
 import Button from '../components/Button'
@@ -35,6 +34,7 @@ const Welcome = () => {
               buttonStyle={{ marginHorizontal: widthPer(3) }}
               textStyle={{color: "white"}}
               onPress={() => {}}
+              icon='true'
             />
           </View>
         </View>
