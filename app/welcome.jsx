@@ -1,25 +1,15 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { heightPer, widthPer } from '../helpers/common'
 import Button from '../components/Button'
-import { useFonts } from 'expo-font'
-import { ImageBackground } from 'react-native'
+import ScreenWrapper from '../components/ScreenWrapper'
+import Loading from '../components/Loading'
 
 const Welcome = () => {
-  const [fontsLoaded] = useFonts({
-    "Atures 700": require("../assets/fonts/Atures 700 PERSONAL USE ONLY.ttf"),
-    "Montserrat Alternates Medium": require("../assets/fonts/Montserrat Alternates Medium.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return <Text>Loading page...</Text>;
-  }
-
   return (
-    <>
+    <ScreenWrapper>
       <StatusBar style="light"></StatusBar>
-      <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require("../assets/images/splash img.png")}>
         <View style={styles.container}>
           <Image style={styles.welcomeImage} resizeMode="contain" source={require("../assets/images/welcome img.png")}></Image>
 
@@ -36,11 +26,16 @@ const Welcome = () => {
               onPress={() => {}}
               icon='true'
             />
+
+            <View style={styles.bottomTextContainer}>
+              <Text style={styles.loginText}>Already have an account?</Text>
+              <Pressable>
+                <Text style={[styles.loginText, {color: '#F6764A', textDecorationLine: 'underline'}]}>Login</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
-      </ImageBackground>
-      
-    </>
+    </ScreenWrapper>
   )
 }
 
@@ -48,13 +43,8 @@ export default Welcome
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: heightPer(4),
     flex: 1,
     alignItems: "center",
-  },
-  backgroundImage: {
-    width: widthPer(100),
-    height: '100%'
   },
   welcomeImage: {
     height: heightPer(50),
@@ -79,5 +69,16 @@ const styles = StyleSheet.create({
   footer: {
     width: '50%',
     paddingVertical: 100
+  },
+  bottomTextContainer: {
+    paddingTop: 6,
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  loginText: {
+    color: "white",
+    textAlign: "center",
   }
 })

@@ -1,8 +1,9 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { heightPer } from '../helpers/common'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Feather } from "@expo/vector-icons";
+import Loading from './Loading';
 
 const Button = ({
     buttonStyle,
@@ -12,6 +13,15 @@ const Button = ({
     loading = false,
     icon = false
 }) => {
+
+  if (loading) {
+    return (
+      <View style={ buttonStyle }>
+        <Loading />
+      </View>
+    );
+  }
+
   return (
     <TouchableOpacity onPress={ onPress } style={ buttonStyle }>
       <LinearGradient 
@@ -43,7 +53,4 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       gap: 5
     },
-    text: {
-        fontFamily: 'Montserrat Alternates Medium'
-    }
 })
