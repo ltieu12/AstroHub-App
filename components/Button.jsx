@@ -32,7 +32,7 @@ const Button = ({
       >
         <View style={styles.content}>
           <Text style={[styles.text, textStyle]}>{ title }</Text>
-          {icon && <Feather name="arrow-right" size={20} color="white" />}
+          {icon && <Feather name="arrow-right" size={20} color='white' />}
         </View>
       </LinearGradient>
     </TouchableOpacity>
@@ -44,9 +44,9 @@ export default Button
 const styles = StyleSheet.create({
     linearGradient: {
         height: heightPer(6.6),
-        justifyContent: "center",
-        alignItems: "center",
-        borderCurve: "continuous",
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderCurve: 'continuous',
         borderRadius: 15
     },
     content: {

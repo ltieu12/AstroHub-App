@@ -8,7 +8,7 @@ const ScreenWrapper = ({children}) => {
     const paddingTop = top > 0 ? top + 5 : top = 30;
 
   return (
-    <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require("../assets/images/splash img.png")}>
+    <ImageBackground style={styles.backgroundImage} resizeMode='cover' source={require("../assets/images/splash img.png")}>
       <View style={{flex: 1, paddingTop}}>
         {
           children
