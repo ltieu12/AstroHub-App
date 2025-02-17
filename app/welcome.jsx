@@ -32,7 +32,7 @@ const Welcome = () => {
             <View style={styles.bottomTextContainer}>
               <Text style={styles.loginText}>Already have an account?</Text>
               <Pressable onPress={() => router.push('login')}>
-                <Text style={[styles.loginText, {color: '#F6764A', textDecorationLine: 'underline'}]}>Login</Text>
+                <Text style={[styles.loginText, {color: '#F6764A', fontWeight: 700}]}>Login</Text>
               </Pressable>
             </View>
           </View>

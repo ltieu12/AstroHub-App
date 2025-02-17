@@ -53,4 +53,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       gap: 5
     },
+    text: {
+      fontWeight: 600
+    }
 })
