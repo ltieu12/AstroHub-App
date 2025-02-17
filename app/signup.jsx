@@ -8,15 +8,16 @@ import { BlurView } from 'expo-blur'
 import Input from '../components/Input'
 import Button from '../components/Button'
 
-const Login = () => {
+const SignUp = () => {
   const router = useRouter();
+  const nameRef = useRef();
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
-    if (!emailRef.current || !passwordRef.current) {
-      Alert.alert('Login', "Please fill in all fields")
+    if (!nameRef.current || !emailRef.current || !passwordRef.current) {
+      Alert.alert('Sign Up', "Please fill the details to create an account")
       return;
     }
   };
@@ -27,10 +28,14 @@ const Login = () => {
       <BlurView intensity={4} tint="dark" style={styles.container}>
         <View style={{gap: 40}}>
           <BackButton router={router} />
-          <Text style={styles.title}>Welcome Back!</Text>
+          <Text style={styles.title}>Let's Get You Onboard!</Text>
         </View>
 
         <View style={{gap: 30}}>
+          <Input
+            placeholder='Enter your name'
+            onChangeText={value => nameRef.current = value}>
+          </Input>
           <Input
             placeholder='Enter your email'
             onChangeText={value => emailRef.current = value}>
@@ -40,12 +45,11 @@ const Login = () => {
             secureTextEntry
             onChangeText={value => passwordRef.current = value}>
           </Input>
-          <Text style={{color: '#C3B5EC', textAlign: 'right'}}>Forgot Password?</Text>
         </View>
 
         <View style={styles.footer}>
           <Button 
-            title='Sign In'
+            title='Sign Up'
             buttonStyle={{ marginHorizontal: widthPer(25) }}
             textStyle={{color: 'white'}}
             loading={loading}
@@ -53,9 +57,9 @@ const Login = () => {
           >
           </Button>
           <View style={styles.bottomTextContainer}>
-            <Text style={{color: '#FFFFFF'}}>Don't have an account?</Text>
-            <Pressable onPress={() => router.push('signup')}>
-              <Text style={[{color: '#F6764A', fontWeight: 700}]}>Sign Up</Text>
+            <Text style={{color: '#FFFFFF'}}>Already have an account?</Text>
+            <Pressable onPress={() => router.push('login')}>
+              <Text style={[{color: '#F6764A', fontWeight: 700}]}>Sign In</Text>
             </Pressable>
           </View>
         </View>
@@ -64,7 +68,7 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignUp
 
 const styles = StyleSheet.create({
     container: {
