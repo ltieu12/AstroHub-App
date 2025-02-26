@@ -1,11 +1,16 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status, generics
 from django.contrib.auth import authenticate
+from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializer import RegisterSerializer
+
+from .serializer import RegisterSerializer, UserListSerializer
+from .models import CustomUser
 
 class RegisterView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -15,9 +20,11 @@ class RegisterView(APIView):
 
 
 class LoginView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        username = request.data.get("username")
+        password = request.data.get("password")
 
         user = authenticate(username=username, password=password)
         if user:
@@ -30,4 +37,11 @@ class LoginView(APIView):
                 "email": user.email
             }, status=status.HTTP_200_OK)
         
-        return Response({"Error: Invalid username or password!"}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response({"Error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserListSerializer
+    permission_classes = [AllowAny]

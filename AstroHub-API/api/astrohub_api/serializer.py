@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework.validators import UniqueValidator
+from .models import CustomUser
+
 
 User = get_user_model()
 
@@ -23,3 +25,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             )
 
             return user
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'password', 'bio', 'profile_pic']
