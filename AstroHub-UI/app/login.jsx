@@ -32,7 +32,7 @@ const Login = () => {
 
         <View style={{gap: 30}}>
           <Input
-            placeholder='Enter your email'
+            placeholder='Enter your username'
             onChangeText={value => emailRef.current = value}>
           </Input>
           <Input
@@ -40,7 +40,7 @@ const Login = () => {
             secureTextEntry
             onChangeText={value => passwordRef.current = value}>
           </Input>
-          <Text style={{color: '#C3B5EC', textAlign: 'right'}}>Forgot Password?</Text>
+          <Text style={{color: '#C3B5EC'}}>Forgot Password?</Text>
         </View>
 
         <View style={styles.footer}>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         width: widthPer(85),
         paddingVertical: heightPer(3),
         paddingHorizontal: widthPer(4),
-        marginTop: heightPer(5),        
+        marginTop: heightPer(3),        
         marginBottom: heightPer(10),
         backgroundColor: 'rgba(20, 24, 35, 0.8)',
         borderCurve: 'continuous',

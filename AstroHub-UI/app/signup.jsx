@@ -10,14 +10,17 @@ import Button from '../components/Button'
 
 const SignUp = () => {
   const router = useRouter();
-  const nameRef = useRef();
+
+  const nameRef = useRef("");
+  const usernameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
+
   const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
-    if (!nameRef.current || !emailRef.current || !passwordRef.current) {
-      Alert.alert('Sign Up', "Please fill the details to create an account")
+    if (!nameRef.current || !usernameRef.current || !emailRef.current || !passwordRef.current) {
+      Alert.alert('Sign Up', "Please fill all the details to create an account")
       return;
     }
   };
@@ -35,6 +38,10 @@ const SignUp = () => {
           <Input
             placeholder='Enter your name'
             onChangeText={value => nameRef.current = value}>
+          </Input>
+          <Input
+            placeholder='Enter your username'
+            onChangeText={value => usernameRef.current = value}>
           </Input>
           <Input
             placeholder='Enter your email'
@@ -78,8 +85,8 @@ const styles = StyleSheet.create({
         width: widthPer(85),
         paddingVertical: heightPer(3),
         paddingHorizontal: widthPer(4),
-        marginTop: heightPer(5),        
-        marginBottom: heightPer(10),
+        marginTop: heightPer(3),        
+        marginBottom: heightPer(6),
         backgroundColor: 'rgba(20, 24, 35, 0.8)',
         borderCurve: 'continuous',
         borderRadius: 15,
