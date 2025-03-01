@@ -3,13 +3,18 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-    def create(self, username, email, name, password=None, **extra_fields):
+    def create(self, username, email, password=None, **extra_fields):
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, name=name, **extra_fields)
+        user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
+    
+    def create_superuser(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        return self.create(username, email, password, **extra_fields)
     
 
 class CustomUser(AbstractUser):
