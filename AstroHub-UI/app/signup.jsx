@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router'
 import { BlurView } from 'expo-blur'
 import Input from '../components/Input'
 import Button from '../components/Button'
+import { registerUser } from '../helpers/api'
 
 const SignUp = () => {
   const router = useRouter();
@@ -18,10 +19,30 @@ const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!nameRef.current || !usernameRef.current || !emailRef.current || !passwordRef.current) {
       Alert.alert('Sign Up', "Please fill all the details to create an account")
       return;
+    }
+    await handleRegister();
+  };
+
+  const handleRegister = async () => {
+    try {
+      const formData = {
+        "username": usernameRef.current,
+        "email": emailRef.current,
+        "password": passwordRef.current,
+        "name": nameRef.current
+      };
+      
+      await registerUser(formData);
+      Alert.alert("Success", "You have been signed up!");
+      router.push('home');
+    }
+    catch(error) {
+      console.log(error);
+      Alert.alert("Error", error.message || "Registration failed.");
     }
   };
 
