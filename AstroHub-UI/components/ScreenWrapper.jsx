@@ -1,20 +1,30 @@
 import { StyleSheet, View, ImageBackground } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { widthPer } from '../helpers/common';
+import Loading from './Loading';
 
 const ScreenWrapper = ({children}) => {
     const { top } = useSafeAreaInsets();
     const paddingTop = top > 0 ? top + 5 : top = 30;
+    const [loading, setLoading] = useState(true);
 
   return (
-    <ImageBackground style={styles.backgroundImage} resizeMode='cover' source={require("../assets/images/splash img.png")}>
-      <View style={{flex: 1, paddingTop}}>
-        {
-          children
-        }
-      </View>
-    </ImageBackground>
+    <>
+      {loading && <Loading />}
+      <ImageBackground 
+        style={styles.backgroundImage} 
+        resizeMode='cover' 
+        source={require("../assets/images/splash img.png")}
+        onLoad={() => setLoading(false)}
+      >
+        <View style={{flex: 1, paddingTop}}>
+          {
+            children
+          }
+        </View>
+      </ImageBackground>
+    </>
   )
 }
 
