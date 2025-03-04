@@ -17,6 +17,10 @@ const SignUp = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async () => {
@@ -24,8 +28,32 @@ const SignUp = () => {
       Alert.alert('Sign Up', "Please fill all the details to create an account")
       return;
     }
-    await handleRegister();
+    if (validateInput()) {
+      await handleRegister();
+    }
   };
+
+  const validateInput = () => {
+    let isValid = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailRef.current)) {
+      setEmailError("Invalid email format.");
+      isValid = false;
+    }
+
+    const textRegex = /^[A-Za-z]+$/;
+    if (!textRegex.test(nameRef.current)) {
+      setNameError("Name should contain letter only.");
+      isValid = false;
+    }
+
+    if (passwordRef.current.length < 8) {
+      setPasswordError("Password must be at least 8 characters.");
+      isValid = false;
+    }
+
+    return isValid;
+  }
 
   const handleRegister = async () => {
     try {
@@ -58,7 +86,8 @@ const SignUp = () => {
         <View style={{gap: 30}}>
           <Input
             placeholder='Enter your name'
-            onChangeText={value => nameRef.current = value}>
+            onChangeText={value => nameRef.current = value}
+            error={nameError}>
           </Input>
           <Input
             placeholder='Enter your username'
@@ -66,12 +95,14 @@ const SignUp = () => {
           </Input>
           <Input
             placeholder='Enter your email'
-            onChangeText={value => emailRef.current = value}>
+            onChangeText={value => emailRef.current = value}
+            error={emailError}>
           </Input>
           <Input
             placeholder='Enter your password'
             secureTextEntry
-            onChangeText={value => passwordRef.current = value}>
+            onChangeText={value => passwordRef.current = value}
+            error={passwordError}>
           </Input>
         </View>
 

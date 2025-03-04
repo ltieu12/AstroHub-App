@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput, Text } from 'react-native'
 import React from 'react'
 import { heightPer } from '../helpers/common'
 
@@ -12,6 +12,7 @@ const Input = (props) => {
         {...props}
       >
       </TextInput>
+      {props.error ? <Text style={{ color: "#EF4949", gap: 0 }}>{ props.error }</Text> : null}
     </View>
   )
 }
