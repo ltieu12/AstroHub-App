@@ -7,19 +7,40 @@ import { useRouter } from 'expo-router'
 import { BlurView } from 'expo-blur'
 import Input from '../components/Input'
 import Button from '../components/Button'
+import { loginUser } from '../helpers/api'
 
 const Login = () => {
   const router = useRouter();
-  const emailRef = useRef("");
+
+  const usernameRef = useRef("");
   const passwordRef = useRef("");
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = () => {
-    if (!emailRef.current || !passwordRef.current) {
+  const onSubmit = async () => {
+    if (!usernameRef.current || !passwordRef.current) {
       Alert.alert('Login', "Please fill in all fields")
       return;
     }
+
+    await handleLogin();
   };
+
+  const handleLogin = async () => {
+    try {
+      const formData = {
+        "username": usernameRef.current,
+        "password": passwordRef.current
+      }
+
+      await loginUser(formData);
+      Alert.alert("Success", "You have been logged in!");
+      router.push('home');
+    }
+    catch(error) {
+      console.log(error);
+      Alert.alert("Error", error.message || "Login failed.");
+    }
+  }
 
   return (
     <ScreenWrapper>
@@ -33,7 +54,7 @@ const Login = () => {
         <View style={{gap: 30}}>
           <Input
             placeholder='Enter your username'
-            onChangeText={value => emailRef.current = value}>
+            onChangeText={value => usernameRef.current = value}>
           </Input>
           <Input
             placeholder='Enter your password'
