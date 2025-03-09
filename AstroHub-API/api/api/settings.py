@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_%@yzp^-x_ditj-%*5e0+)^$poywa&u_y69$b@ru(o^_)r8-bk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -64,16 +64,19 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'exp://192.168.0.108:8081',
-    'http://localhost:8081'
-]
+CORS_ALLOWED_ALL_ORIGINS = True
 
-CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = [
-    'exp://192.168.0.108:8081',
-    'http://localhost:8081'
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://192.168.0.108:8081',
+#     'http://localhost:8081'
+# ]
+
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://192.168.0.108:8081',
+#     'http://localhost:8081'
+# ]
+
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [
@@ -100,8 +103,12 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'astrohub_db',
+        'USER': 'lamtieu',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
